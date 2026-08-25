@@ -11,11 +11,12 @@
   --azure:#2e5bff;        /* 亮蓝 */
   --violet:#5b6ef5;       /* 蓝紫 */
   --cyan:#6ee8ff;         /* 电光青高光 */
-  --text:#eef2ff;
-  --text-dim:#aab4d8;
-  --text-faint:rgba(220,230,255,.45);
-  --card:rgba(180,200,255,.06);
-  --card-border:rgba(180,200,255,.12);
+  --text:#f4f7ff;
+  --text-dim:#bbc6ea;
+  --text-faint:rgba(214,228,255,.5);
+  --card:rgba(178,200,255,.11);       /* 卡片底更实,信息更清晰 */
+  --card-border:rgba(178,200,255,.2); /* 边框更明显 */
+  --card-strong:rgba(178,200,255,.16);
   --radius:20px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -153,12 +154,19 @@ h2{
 
 /* ---------- 玻璃拟态通用 ---------- */
 .glass{
-  background:var(--card);
+  position:relative;
+  background:linear-gradient(180deg, var(--card-strong), var(--card));
   border:1px solid var(--card-border);
   border-radius:var(--radius);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
-  box-shadow:0 18px 44px rgba(0,0,0,.28);
+  box-shadow:0 18px 44px rgba(0,0,0,.30), inset 0 1px 0 rgba(210,225,255,.18);
+}
+/* 卡片顶缘微光,让卡片从背景"浮"出来更清晰 */
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(140% 60% at 50% -8%, rgba(140,180,255,.16), transparent 55%);
+  opacity:.8;
 }
 
 /* ---------- 现状 ---------- */
@@ -167,9 +175,9 @@ h2{
 .fact::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;background:radial-gradient(340px 140px at 12% 50%,rgba(46,91,255,.12),transparent 70%);pointer-events:none}
 .fact:hover::before{opacity:1}
 .fact:hover{border-color:rgba(46,91,255,.5);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-.fact-icon{flex:none;width:50px;height:50px;display:grid;place-items:center;font-size:23px;border-radius:14px;background:rgba(255,244,235,.07);border:1px solid rgba(255,244,235,.1)}
+.fact-icon{flex:none;width:50px;height:50px;display:grid;place-items:center;font-size:23px;border-radius:14px;background:rgba(178,200,255,.14);border:1px solid rgba(178,200,255,.22)}
 .fact-body strong{display:block;font-size:17px;font-weight:600;margin-bottom:4px}
-.fact-body span{color:var(--text-dim);font-size:15px}
+.fact-body span{color:var(--text-dim);font-size:15px;line-height:1.6}
 
 /* ---------- 作品卡 ---------- */
 .project-card{display:block;position:relative;overflow:hidden;padding:34px 30px;text-decoration:none;margin-top:8px}
@@ -182,7 +190,7 @@ h2{
 .project-card h3{margin:0 0 12px;padding-right:34px;font-size:27px;font-weight:700;background:linear-gradient(110deg,var(--klein),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
 .project-card .desc{margin:0 0 18px;color:var(--text-dim);font-size:15.5px;max-width:540px}
 .project-meta{display:flex;flex-wrap:wrap;gap:10px}
-.project-meta span{font-size:12.5px;line-height:1;padding:8px 13px;border-radius:999px;background:rgba(255,244,235,.06);border:1px solid rgba(255,244,235,.1);color:rgba(255,244,235,.85)}
+.project-meta span{font-size:12.5px;line-height:1;padding:8px 13px;border-radius:999px;background:rgba(178,200,255,.14);border:1px solid rgba(178,200,255,.22);color:rgba(226,236,255,.95)}
 
 /* ---------- 技能 ---------- */
 .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
