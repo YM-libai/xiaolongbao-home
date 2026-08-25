@@ -119,31 +119,41 @@ export function initFluid({ reduceMotion = false } = {}) {
       n *= 0.5;
       n += 0.5;
 
-      // ---- 克莱因蓝调色板 ----
-      // 克莱因蓝 #002FA7 → 蓝紫 #5b6ef5 → 电光青 #6ee8ff,亮而饱和
-      vec3 klein = vec3(0.0, 0.184, 0.655);        /* 克莱因蓝 */
-      vec3 azure = vec3(0.20, 0.35, 0.93);         /* 亮蓝 */
-      vec3 violet = vec3(0.42, 0.36, 0.96);        /* 蓝紫 */
-      vec3 cyan = vec3(0.52, 0.90, 1.0);           /* 电光青高光 */
-      vec3 glow = vec3(0.78, 0.93, 1.0);           /* 亮青光 */
+      // ---- 《星夜》调色板:鲜克莱因蓝 + 金黄/橘漩涡点缀 ----
+      vec3 klein = vec3(0.165, 0.325, 1.0);       /* 克莱因蓝提亮 #2a53ff */
+      vec3 deep = vec3(0.023, 0.063, 0.24);       /* 星夜深蓝 #061038 */
+      vec3 azure = vec3(0.20, 0.40, 0.98);        /* 亮蓝 */
+      vec3 cyan = vec3(0.52, 0.90, 1.0);          /* 电光青高光 */
+      vec3 gold = vec3(0.97, 0.79, 0.28);         /* 星夜金 #f7c948 */
+      vec3 orange = vec3(0.98, 0.55, 0.29);       /* 星夜橘 #fb8b4a */
 
-      // 用纹理值 n 在高饱和蓝系间插值(更亮、更饱和)
+      // 主流体:深蓝 -> 亮蓝 -> 电光青(星夜的主色调,更亮)
       vec3 color;
-      float nc = smoothstep(0.26, 0.78, n);
-      if(nc < 0.35){ color = mix(klein, azure, nc / 0.35); }
-      else if(nc < 0.7){ color = mix(azure, violet, (nc - 0.35) / 0.35); }
-      else { color = mix(violet, cyan, (nc - 0.7) / 0.3); }
+      float nc = smoothstep(0.24, 0.80, n);
+      if(nc < 0.38){ color = mix(deep, klein, nc / 0.38); }
+      else if(nc < 0.72){ color = mix(klein, azure, (nc - 0.38) / 0.34); }
+      else { color = mix(azure, cyan, (nc - 0.72) / 0.28); }
 
-      // 局部提亮:接近 1 的地方浮出青光,像流动的波光
-      float highlight = smoothstep(0.72, 0.96, n);
-      color = mix(color, glow, highlight * 0.5);
+      // 金色漩涡星点:更亮、更密、更均匀的星芒(像《星夜》的满天星河)
+      float stars = fbm(vec3(p * 3.2 + vec2(1.7, 4.2), t * 1.5 + 3.0));
+      float stars2 = fbm(vec3(p * 4.6 + vec2(5.1, 2.3), t * 1.9 + 6.0));
+      float swirl = smoothstep(0.52, 0.92, max(stars, stars2 * 0.9));
+      float twinkle = pow(swirl, 0.5);
+      vec3 starlight = mix(gold, orange, smoothstep(0.45, 1.0, swirl));
+      // 中心更亮(像星光聚拢),边缘渐隐
+      color = mix(color, starlight, smoothstep(0.0, 0.6, twinkle));
+      color += starlight * twinkle * 0.5;      // 加性提亮,金光更"闪"
+
+      // 局部提亮:接近 1 的地方浮出青光波光,像流动的星河
+      float highlight = smoothstep(0.74, 0.97, n);
+      color = mix(color, cyan, highlight * 0.5);
 
       // 基础亮度/饱和度整体抬高——背景更亮更通透
-      float alpha = 0.9 * (0.62 + 0.38 * n);
+      float alpha = 0.92 * (0.64 + 0.36 * n);
 
       // 边缘稍微减淡(中心区更亮更聚焦,但整体不再死黑)
-      float vig = smoothstep(1.3, 0.42, length(vUv - 0.5) * 1.3);
-      color *= 0.58 + 0.42 * vig;
+      float vig = smoothstep(1.3, 0.45, length(vUv - 0.5) * 1.3);
+      color *= 0.62 + 0.38 * vig;
       alpha *= (0.62 + 0.38 * vig);
 
       gl_FragColor = vec4(color * uIntensity, alpha);

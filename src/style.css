@@ -4,22 +4,42 @@
    ============================================================ */
 
 :root{
-  /* 克莱因蓝系 —— 流体背景与 UI 同色调 */
-  --bg:#060a1c;           /* 深蓝黑底 */
-  --bg-2:#0a1228;
-  --klein:#002fa7;        /* 克莱因蓝 */
+  /* 《星夜》调色板 —— 鲜克莱因蓝提亮 + 金黄/橘星点点缀 */
+  --bg:#05091e;           /* 星夜深蓝底 */
+  --bg-2:#0a1030;
+  --klein:#2a53ff;        /* 克莱因蓝提亮 */
   --azure:#2e5bff;        /* 亮蓝 */
-  --violet:#5b6ef5;       /* 蓝紫 */
   --cyan:#6ee8ff;         /* 电光青高光 */
+  --starry-gold:#f7c948;  /* 星夜金 */
+  --starry-orange:#fb8b4a;/* 星夜橘 */
   --text:#f4f7ff;
-  --text-dim:#bbc6ea;
-  --text-faint:rgba(214,228,255,.5);
-  --card:rgba(178,200,255,.11);       /* 卡片底更实,信息更清晰 */
-  --card-border:rgba(178,200,255,.2); /* 边框更明显 */
-  --card-strong:rgba(178,200,255,.16);
+  --text-dim:#aab6e0;
+  --text-faint:rgba(210,226,255,.5);
+  --card:rgba(190,205,255,.1);
+  --card-border:rgba(190,205,255,.2);
+  --card-strong:rgba(190,205,255,.15);
   --radius:20px;
   --ease:cubic-bezier(.2,.7,.2,1);
+  --font-display:"Space Grotesk","Avenir Next","Segoe UI",-apple-system,sans-serif; /* 英文几何无衬线 */
+  --font-body:inherit;
 }
+
+/* 极简几何 logo */
+.brand-logo{
+  display:grid;place-items:center;width:74px;height:74px;margin:0 auto 18px;
+  border-radius:22px;max-width:100%;
+  background:linear-gradient(135deg,var(--klein),var(--azure),var(--cyan));
+  box-shadow:0 14px 46px rgba(42,83,255,.55), inset 0 1px 0 rgba(255,255,255,.45);
+  position:relative;
+}
+.brand-logo svg{width:40px;height:40px;display:block}
+/* XIAOLONGBAO 英文字标 */
+.brand-word{
+  font-family:var(--font-display);font-weight:700;letter-spacing:.42em;
+  font-size:clamp(13px,2.6vw,16px);color:var(--text);
+  text-transform:uppercase;text-indent:.42em;margin-bottom:10px;
+}
+.brand-word .dot{color:var(--starry-gold)}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -34,9 +54,9 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
-::selection{background:rgba(46,91,255,.45);color:#fff}
+::selection{background:rgba(42,83,255,.55);color:#fff}
 a{color:inherit}
-a:focus-visible{outline:2px solid var(--azure);outline-offset:3px;border-radius:8px}
+a:focus-visible{outline:2px solid var(--starry-gold);outline-offset:3px;border-radius:8px}
 
 /* ---------- 抽象流体背景画布 ---------- */
 #fluid{
@@ -104,25 +124,22 @@ section{padding:0 clamp(20px,6vw,28px)}
   padding-top:14vh;padding-bottom:10vh;
 }
 
-/* 区块小标签(编辑排印感) */
+/* 区块小标签(编辑排印感,星夜金点缀) */
 .section-label{
-  margin-bottom:10px;color:var(--azure);font-size:13px;letter-spacing:.24em;
+  margin-bottom:10px;color:var(--starry-gold);font-size:13px;letter-spacing:.28em;
   text-transform:uppercase;font-weight:600;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::before{
+  content:"✦";font-size:11px;color:var(--starry-orange);
 }
 
 /* ---------- Hero ---------- */
-.hero-inner{max-width:760px}
-.brand-mark{
-  position:relative;width:72px;height:72px;margin:0 auto 26px;
-  display:grid;place-items:center;border-radius:20px;
-  font-size:33px;font-weight:800;color:#fff;
-  background:linear-gradient(135deg,var(--klein),var(--azure),var(--cyan));
-  box-shadow:0 14px 46px rgba(46,91,255,.5), inset 0 1px 0 rgba(255,255,255,.5);
-  animation:pop .8s var(--ease) both;
-}
-.brand-mark::after{
+.hero-inner{max-width:820px}
+.brand-logo{animation:pop .8s var(--ease) both}
+.brand-logo::after{
   content:"";position:absolute;inset:-12px;z-index:-1;border-radius:26px;
-  background:linear-gradient(135deg,rgba(46,91,255,.6),rgba(110,232,255,.5));
+  background:linear-gradient(135deg,rgba(42,83,255,.6),rgba(110,232,255,.5));
   filter:blur(26px);opacity:.5;animation:pulseGlow 5s ease-in-out infinite;
 }
 @keyframes pop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
