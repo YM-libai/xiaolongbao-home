@@ -249,28 +249,6 @@ footer p{margin:0}
 .scroll-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--klein),var(--cyan));box-shadow:0 0 14px rgba(46,91,255,.7)}
 .scrolled .scroll-progress{opacity:1}
 
-/* ---------- 背景音乐开关按钮 ---------- */
-.music-toggle{
-  position:fixed;right:24px;bottom:24px;z-index:200;
-  width:46px;height:46px;border-radius:50%;border:1px solid var(--card-border);
-  background:linear-gradient(180deg,var(--card-strong),var(--card));
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  color:var(--text);cursor:pointer;display:grid;place-items:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.15);
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
-}
-.music-toggle:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.5)}
-.music-icon{font-size:20px;line-height:1;transition:opacity .3s}
-/* 播放中:图标变星夜金,并加个呼吸光晕 */
-.music-toggle.is-playing{border-color:rgba(247,201,72,.6);box-shadow:0 0 22px rgba(247,201,72,.4)}
-.music-toggle.is-playing .music-icon{color:var(--starry-gold)}
-.music-toggle.is-playing::after{
-  content:"";position:absolute;inset:-5px;border-radius:50%;
-  border:1px solid rgba(247,201,72,.35);animation:musicPulse 2.4s ease-out infinite;
-}
-@keyframes musicPulse{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.25);opacity:0}}
-@media (prefers-reduced-motion:reduce){.music-toggle.is-playing::after{animation:none}}
-
 /* ---------- 无障碍:减少动效 ---------- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
