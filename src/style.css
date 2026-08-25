@@ -204,7 +204,13 @@ h2{
 .fact-body span{color:var(--text-dim);font-size:15px;line-height:1.6}
 
 /* ---------- 作品卡 ---------- */
-.project-card{display:block;position:relative;overflow:hidden;padding:34px 30px;text-decoration:none;margin-top:8px}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.project-card{display:block;position:relative;overflow:hidden;padding:32px 28px;text-decoration:none;margin-top:4px}
+.project-badge{
+  position:absolute;top:26px;right:30px;font-size:12px;
+  font-family:var(--font-display);letter-spacing:.2em;color:var(--starry-gold);
+  opacity:.7;font-weight:700;
+}
 .project-card::before{content:"";position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(46,91,255,.2),transparent 70%);pointer-events:none}
 .project-card::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;background:radial-gradient(420px 200px at 85% 20%,rgba(110,232,255,.14),transparent 70%);pointer-events:none}
 .project-card:hover::after{opacity:1}
