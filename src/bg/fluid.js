@@ -101,46 +101,50 @@ export function initFluid({ reduceMotion = false } = {}) {
       // 基于 UV 稍微拉长比例,横向更有流动感
       vec2 uv = vUv * vec2(1.4, 1.0);
       vec2 p = uv * 2.6;
-      float t = uTime * 0.16;
+      float t = uTime * 0.34;   // 加快流速,更"活"
 
-      // 叠加 2 层不同频率/速度的噪声,形成"云染"层
+      // 叠加 3 层不同频率/速度的噪声,形成更丰富"翻涌"层次
       float n1 = fbm(vec3(p, t));
-      float n2 = fbm(vec3(p * 1.7 + vec2(3.7, 1.4), t * 1.4 + 2.0));
-      float n = 0.5 * n1 + 0.5 * n2;      // 混合 [-1,1] 左右
+      float n2 = fbm(vec3(p * 1.7 + vec2(3.7, 1.4), t * 1.9 + 2.0));
+      float n3 = fbm(vec3(p * 3.1 + vec2(6.2, 2.8), t * 2.4 + 5.0));
+      float n = 0.48 * n1 + 0.34 * n2 + 0.18 * n3;   // 混合更丰富
+
 
       // 鼠标扰动:把鼠标坐标加进噪声输入,产生局部"流过"效果
       vec2 m = uMouse * 0.7;
-      float mouseNudge = fbm(vec3(p + m * 0.5, t + uMouseOn * 1.2));
-      n += mouseNudge * 0.25 * uMouseOn;
+      float mouseNudge = fbm(vec3(p + m * 0.6, t + uMouseOn * 1.6));
+      n += mouseNudge * 0.35 * uMouseOn;    // 更强扰动,更灵动
 
       // 归一化到 [0,1]
       n *= 0.5;
       n += 0.5;
 
-      // ---- 暖色三色渐变调色板 ----
-      // 金琥珀 #fcd34d → 鲜橙 #fb923c → 珊瑚玫红 #fb7185,再加一点暖白
-      vec3 amber = vec3(0.988, 0.827, 0.302);
-      vec3 orange = vec3(0.984, 0.573, 0.235);
-      vec3 rose = vec3(0.984, 0.443, 0.522);
-      vec3 cream = vec3(1.0, 0.94, 0.85);
+      // ---- 克莱因蓝调色板 ----
+      // 克莱因蓝 #002FA7 → 蓝紫 #5b6ef5 → 电光青 #6ee8ff,亮而饱和
+      vec3 klein = vec3(0.0, 0.184, 0.655);        /* 克莱因蓝 */
+      vec3 azure = vec3(0.20, 0.35, 0.93);         /* 亮蓝 */
+      vec3 violet = vec3(0.42, 0.36, 0.96);        /* 蓝紫 */
+      vec3 cyan = vec3(0.52, 0.90, 1.0);           /* 电光青高光 */
+      vec3 glow = vec3(0.78, 0.93, 1.0);           /* 亮青光 */
 
-      // 用纹理值 n 在三种颜色间插值
+      // 用纹理值 n 在高饱和蓝系间插值(更亮、更饱和)
       vec3 color;
-      float nc = smoothstep(0.30, 0.72, n);
-      if(nc < 0.4){ color = mix(amber, orange, nc / 0.4); }
-      else { color = mix(orange, rose, (nc - 0.4) / 0.6); }
+      float nc = smoothstep(0.26, 0.78, n);
+      if(nc < 0.35){ color = mix(klein, azure, nc / 0.35); }
+      else if(nc < 0.7){ color = mix(azure, violet, (nc - 0.35) / 0.35); }
+      else { color = mix(violet, cyan, (nc - 0.7) / 0.3); }
 
-      // 局部提亮:接近 1 的地方浮出奶油白,类似光斑
-      float highlight = smoothstep(0.78, 0.98, n);
-      color = mix(color, cream, highlight * 0.35);
+      // 局部提亮:接近 1 的地方浮出青光,像流动的波光
+      float highlight = smoothstep(0.72, 0.96, n);
+      color = mix(color, glow, highlight * 0.5);
 
-      // 亮度整体靠 uIntensity 控制(跟随滚动状态微变更生动)
-      float alpha = 0.62 * (0.40 + 0.60 * n);
+      // 基础亮度/饱和度整体抬高——背景更亮更通透
+      float alpha = 0.9 * (0.62 + 0.38 * n);
 
-      // 边缘加深,让中心流体更透气(暗角,避免过亮淹没文字)
-      float vig = smoothstep(1.15, 0.35, length(vUv - 0.5) * 1.4);
-      color *= 0.42 + 0.58 * vig;
-      alpha *= (0.40 + 0.60 * vig);
+      // 边缘稍微减淡(中心区更亮更聚焦,但整体不再死黑)
+      float vig = smoothstep(1.3, 0.42, length(vUv - 0.5) * 1.3);
+      color *= 0.58 + 0.42 * vig;
+      alpha *= (0.62 + 0.38 * vig);
 
       gl_FragColor = vec4(color * uIntensity, alpha);
     }
