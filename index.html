@@ -171,6 +171,12 @@
   <!-- 顶部滚动进度条 -->
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
+  <!-- 背景音乐(免版权合成氛围音,点击播放) -->
+  <audio id="bgm" loop preload="none" src="./audio/starfield.mp3"></audio>
+  <button id="music-toggle" class="music-toggle" aria-label="播放背景音乐" aria-pressed="false" title="背景音乐">
+    <span class="music-icon music-off" aria-hidden="true">♪</span>
+  </button>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
