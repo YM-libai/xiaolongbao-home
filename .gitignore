@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+
+# 临时/调试脚本,不提交
+cdp_shot.py
+screenshot.cjs
