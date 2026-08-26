@@ -6,3 +6,6 @@ dist/
 # 临时/调试脚本,不提交
 cdp_shot.py
 screenshot.cjs
+
+# 本地验证截图
+pending/

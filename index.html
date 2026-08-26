@@ -5,13 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>小笼包 · AI 产品探索者 | 个人名片</title>
   <meta name="description" content="小笼包，东南大学在读，「医学影像学 + AI」双学位。正在备考「网络安全 + 法学」双学士。做过「灵敏度工坊」，相信从 0 到 1，把好奇变成能用的东西。" />
-  <meta name="theme-color" content="#0a0908" />
+  <meta name="theme-color" content="#05091e" />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="zh_CN" />
   <meta property="og:title" content="小笼包 · AI 产品探索者" />
   <meta property="og:description" content="东南大学在读 · AI 产品探索者 · 把想法做成真产品。做过「灵敏度工坊」，正在备考网络空间安全 + 法学双学士。" />
   <meta property="og:site_name" content="小笼包的个人主页" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,31 +52,74 @@
     <span class="hint-line"></span>
   </div>
 
+  <!-- ===== 顶部悬浮导航(固定) ===== -->
+  <nav class="lithos-nav" id="lithosNav">
+    <div class="nav-left">
+      <span class="nav-logo" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4 L24 44" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M6 24 L42 24" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M10 12 L38 36" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+          <path d="M38 12 L10 36" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+          <circle cx="24" cy="24" r="5.4" fill="#f7c948"/>
+        </svg>
+      </span>
+      <span class="nav-word">Xiaolongbao</span>
+    </div>
+    <div class="nav-pill">
+      <a class="pill-btn active" href="#about">关于</a>
+      <a class="pill-btn" href="#works">作品</a>
+      <a class="pill-btn" href="#skills">技能</a>
+      <a class="pill-btn" href="#focus">投入</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-cta" href="#works">查看作品 ↗</a>
+    </div>
+    <button class="nav-burger" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#about">关于</a>
+      <a href="#works">作品</a>
+      <a href="#skills">技能</a>
+      <a href="#focus">投入</a>
+      <a class="mobile-cta" href="#works">查看作品 ↗</a>
+    </div>
+  </nav>
+
+  <!-- ===== Lithos 风格 Hero:全屏·双图·光标聚光灯揭示 ===== -->
+  <section class="hero lithos-hero" data-section="hero">
+    <!-- 图层1:基底图 -->
+    <div class="hero-bg hero-bg-base" aria-hidden="true"></div>
+    <!-- 图层2:揭示图(用聚光灯遮罩,默认隐藏,光标滑过才浮现) -->
+    <div class="hero-bg hero-bg-reveal" id="revealLayer" aria-hidden="true"></div>
+    <!-- 聚光灯遮罩画布(隐藏) -->
+    <canvas id="spotlightCanvas" class="spotlight-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-heading">
+      <h1>
+        <span class="h-line1 hero-anim hero-reveal" style="animation-delay:0.25s">Xiaolongbao</span>
+        <span class="h-line2 hero-anim hero-reveal" style="animation-delay:0.42s">把好奇变成能用的东西</span>
+      </h1>
+    </div>
+
+    <div class="hero-bl hero-anim hero-fade" style="animation-delay:0.7s">
+      <p>东南大学在读，正从「医学影像 + AI」转向网安；做过「灵敏度工坊」，相信从 0 到 1，把好奇变成能用的东西。</p>
+    </div>
+
+    <div class="hero-br hero-anim hero-fade" style="animation-delay:0.85s">
+      <p>想看我怎么一步步把想法做成真产品？往下翻，这一年的切面都在里面。</p>
+      <a class="hero-cta" href="#about">开始探索 ▾</a>
+    </div>
+  </section>
+
   <!-- 正文：一镜到底长页 -->
   <main class="page">
 
-    <!-- ===== Hero 开场 ===== -->
-    <section class="hero" data-section="hero">
-      <div class="hero-inner">
-        <div class="brand-logo" aria-hidden="true">
-          <!-- 极简几何标记:抽象的"笼"漩涡 + 中心星点 -->
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24 4 L24 44" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
-            <path d="M6 24 L42 24" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
-            <path d="M10 12 L38 36" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
-            <path d="M38 12 L10 36" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
-            <circle cx="24" cy="24" r="5.4" fill="#f7c948"/>
-          </svg>
-        </div>
-        <div class="brand-word">XIAOLONGBAO<span class="dot">.</span></div>
-        <h1 class="split" data-split>小笼包</h1>
-        <p class="tagline split" data-split>东南大学在读 · AI 产品探索者 · 把想法做成真产品</p>
-        <p class="sub">从 0 到 1，把好奇变成能用的东西</p>
-      </div>
-    </section>
-
     <!-- ===== 关于 / 现状 ===== -->
-    <section class="section" data-section="about">
+    <section class="section" id="about" data-section="about">
       <div class="section-label">关于</div>
       <h2 class="split" data-split>现状</h2>
       <div class="facts">
@@ -95,7 +141,7 @@
     </section>
 
     <!-- ===== 作品 ===== -->
-    <section class="section" data-section="works">
+    <section class="section" id="works" data-section="works">
       <div class="section-label">作品</div>
       <h2 class="split" data-split>作品</h2>
       <div class="projects">
@@ -123,7 +169,7 @@
     </section>
 
     <!-- ===== 技能 / 方向 ===== -->
-    <section class="section" data-section="skills">
+    <section class="section" id="skills" data-section="skills">
       <div class="section-label">技能 / 方向</div>
       <h2 class="split" data-split>技能 / 方向</h2>
       <div class="skills">
@@ -151,7 +197,7 @@
     </section>
 
     <!-- ===== 正在投入 ===== -->
-    <section class="section" data-section="focus">
+    <section class="section" id="focus" data-section="focus">
       <div class="section-label">正在投入</div>
       <h2 class="split" data-split>正在投入</h2>
       <div class="focus glass" data-reveal>
