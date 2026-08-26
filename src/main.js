@@ -61,7 +61,7 @@ function initSpotlight() {
   const reveal = document.getElementById('revealLayer');
   if (!canvas || !reveal || !canvas.getContext) return;
   const ctx = canvas.getContext('2d');
-  const SPOTLIGHT_R = 260;
+  const SPOTLIGHT_R = 200;
 
   const mouse = { x: -999, y: -999 };
   const smooth = { x: -999, y: -999 };
