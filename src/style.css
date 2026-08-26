@@ -295,14 +295,7 @@ footer p{margin:0}
 .hero-bg-reveal{
   z-index:30;
   pointer-events:none;
-  /* 暖白打光:同一张岩层图上叠一层暖白提亮罩,blend(screen 增量照亮)融合 → 聚光灯打亮的岩层 */
-  background-image:
-    linear-gradient(rgba(255,248,235,.62), rgba(255,248,235,.62)),
-    url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_195923_b0ba8ace-1d1d-4f2c-9a28-1ab84b330680.png&w=1280&q=85");
-  background-blend-mode:screen;
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+  background-image:url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_201152_bba90a12-bf12-459f-91f0-51f237dbaf3b.png&w=1280&q=85");
   -webkit-mask-size:100% 100%;mask-size:100% 100%;
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
 }

@@ -97,10 +97,10 @@ function initSpotlight() {
       ctx.clearRect(0, 0, w, h);
       const g = ctx.createRadialGradient(smooth.x, smooth.y, 0, smooth.x, smooth.y, SPOTLIGHT_R);
       g.addColorStop(0, 'rgba(255,255,255,1)');
-      g.addColorStop(0.3, 'rgba(255,255,255,0.9)');
-      g.addColorStop(0.55, 'rgba(255,255,255,0.68)');
-      g.addColorStop(0.78, 'rgba(255,255,255,0.4)');
-      g.addColorStop(0.9, 'rgba(255,255,255,0.16)');
+      g.addColorStop(0.4, 'rgba(255,255,255,1)');
+      g.addColorStop(0.6, 'rgba(255,255,255,0.75)');
+      g.addColorStop(0.75, 'rgba(255,255,255,0.4)');
+      g.addColorStop(0.88, 'rgba(255,255,255,0.12)');
       g.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.fillStyle = g;
       ctx.beginPath();
