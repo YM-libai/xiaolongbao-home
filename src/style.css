@@ -295,17 +295,12 @@ footer p{margin:0}
 .hero-bg-reveal{
   z-index:30;
   pointer-events:none;
-  /* 克莱因蓝星夜渐变 + 金色星点(呼应《星夜》品牌,聚光灯点亮这片星海) */
+  /* 暖白打光:同一张岩层图上叠一层暖白提亮罩,blend(screen 增量照亮)融合 → 聚光灯打亮的岩层 */
   background-image:
-    radial-gradient(2.5px 2.5px at 21% 27%, rgba(247,201,72,.95), transparent 100%),
-    radial-gradient(1.9px 1.9px at 67% 19%, rgba(255,255,255,.9), transparent 100%),
-    radial-gradient(2.3px 2.3px at 45% 73%, rgba(110,232,255,.9), transparent 100%),
-    radial-gradient(1.8px 1.8px at 83% 64%, rgba(247,201,72,.85), transparent 100%),
-    radial-gradient(2px 2px at 12% 64%, rgba(255,255,255,.7), transparent 100%),
-    radial-gradient(1.7px 1.7px at 6% 40%, rgba(110,232,255,.85), transparent 100%),
-    radial-gradient(46% 58% at 50% 44%, rgba(247,201,72,.32), transparent 64%),
-    linear-gradient(135deg, #0a1030 0%, #1b3ad0 38%, #2a53ff 54%, #6ee8ff 86%, #2e5bff 100%);
-  background-size:auto,auto,auto,auto,auto,auto,cover,cover;
+    linear-gradient(rgba(255,248,235,.62), rgba(255,248,235,.62)),
+    url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_195923_b0ba8ace-1d1d-4f2c-9a28-1ab84b330680.png&w=1280&q=85");
+  background-blend-mode:screen;
+  background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
   -webkit-mask-size:100% 100%;mask-size:100% 100%;
